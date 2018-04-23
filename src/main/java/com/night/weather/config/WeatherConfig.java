@@ -21,4 +21,6 @@ public class WeatherConfig {
 	
 	private Long redisTimeOut;
 	
+	private Integer jobTime;
+	
 }

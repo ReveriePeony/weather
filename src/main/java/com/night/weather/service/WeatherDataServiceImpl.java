@@ -37,14 +37,14 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 	
 	@Override
 	public WeatherResponse getDataById(String cityId) {
-		String uri = weatherConfig.getUri() + "cityKey=" + cityId;
-		return getWeather(uri);
+		String uri = weatherConfig.getUri() + "citykey=" + cityId;
+		return this.getWeather(uri);
 	}
 
 	@Override
 	public WeatherResponse getDataByName(String cityName) {
 		String uri = weatherConfig.getUri() + "city=" + cityName;
-		return getWeather(uri);
+		return this.getWeather(uri);
 	}
 	
 	private WeatherResponse getWeather(String uri) {
@@ -59,6 +59,7 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 			ResponseEntity<String> entity = restTemplate.getForEntity(uri, String.class);
 			if(entity.getStatusCodeValue() == 200) {
 				body = entity.getBody();
+				body.replaceAll("<![CDATA[", "").replaceAll("]]>", "");
 			}
 			opsForValue.set(uri, body, weatherConfig.getRedisTimeOut(), TimeUnit.SECONDS);
 		}
@@ -70,6 +71,23 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 		}
 		
 		return weatherResponse;
+	}
+
+	@Override
+	public void SyncDataById(String cityId) {
+		String uri = weatherConfig.getUri() + "cityKey=" + cityId;
+		this.saveWeatehrData(uri);
+	}
+	
+	private void saveWeatehrData(String uri) {
+		ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
+		String body = null;
+		ResponseEntity<String> entity = restTemplate.getForEntity(uri, String.class);
+		if(entity.getStatusCodeValue() == 200) {
+			body = entity.getBody();
+			body.replaceAll("<![CDATA[", "").replaceAll("]]>", "");
+		}
+		opsForValue.set(uri, body, weatherConfig.getRedisTimeOut(), TimeUnit.SECONDS);
 	}
 
 }

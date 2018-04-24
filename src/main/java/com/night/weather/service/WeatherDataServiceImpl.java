@@ -59,7 +59,6 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 			ResponseEntity<String> entity = restTemplate.getForEntity(uri, String.class);
 			if(entity.getStatusCodeValue() == 200) {
 				body = entity.getBody();
-				body.replaceAll("<![CDATA[", "").replaceAll("]]>", "");
 			}
 			opsForValue.set(uri, body, weatherConfig.getRedisTimeOut(), TimeUnit.SECONDS);
 		}
@@ -85,7 +84,6 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 		ResponseEntity<String> entity = restTemplate.getForEntity(uri, String.class);
 		if(entity.getStatusCodeValue() == 200) {
 			body = entity.getBody();
-			body.replaceAll("<![CDATA[", "").replaceAll("]]>", "");
 		}
 		opsForValue.set(uri, body, weatherConfig.getRedisTimeOut(), TimeUnit.SECONDS);
 	}

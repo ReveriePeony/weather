@@ -1,5 +1,6 @@
 server:
-    port: 9000
+    port: 80
+    maxHttpHeaderSize: 10240000
     
 spring:
     profiles:

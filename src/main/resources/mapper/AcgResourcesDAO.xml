@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.night.weather.dao.acg.AcgResourcesDAO">
+
+	<resultMap id="BaseResultMap" type="com.night.weather.entity.acg.AcgResources">
+		<id column="id" property="id" />
+		<result column="classid" property="classid" />
+		<result column="name" property="name" />
+		<result column="torrent" property="torrent" />
+		<result column="magnet" property="magnet" />
+		<result column="publisher" property="publisher" />
+		<result column="size" property="size" />
+		<result column="resourcestime" property="resourcestime" />
+		<result column="resourcesmillis" property="resourcesmillis" />
+		<result column="createtime" property="createtime" />
+		<result column="millisecond" property="millisecond" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, classid, name, torrent, magnet, publisher, size, resourcestime,
+		resourcesmillis, createtime, millisecond
+	</sql>
+
+</mapper>

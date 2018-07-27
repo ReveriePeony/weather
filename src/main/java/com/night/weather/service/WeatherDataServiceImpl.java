@@ -3,8 +3,6 @@ package com.night.weather.service;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -16,15 +14,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.night.weather.config.WeatherConfig;
 import com.night.weather.entity.WeatherResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 
  * @author Reverien9@gmail.com
  * @date 2018年4月21日
  */
+@Slf4j
 @Service
 public class WeatherDataServiceImpl implements WeatherDataService {
-	
-	private final static Logger log = LoggerFactory.getLogger(WeatherDataServiceImpl.class);
 	
 	@Autowired
 	private WeatherConfig weatherConfig;

@@ -18,20 +18,19 @@ import com.night.weather.job.WeatherDataSyncJob;
  */
 @Configuration
 public class QuartzConfig {
-	
+
 	@Autowired
 	private WeatherConfig config;
 
 	@Bean
 	public JobDetail weatherJobDetail() {
-		return JobBuilder.newJob(WeatherDataSyncJob.class).withIdentity("weatherDataSyncJob")
-				.storeDurably().build();
+		return JobBuilder.newJob(WeatherDataSyncJob.class).withIdentity("weatherDataSyncJob").storeDurably().build();
 	}
-	
+
 	@Bean
 	public Trigger weatherJobTrigger() {
-		SimpleScheduleBuilder scheBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(config.getJobTime())
-				.repeatForever();
+		SimpleScheduleBuilder scheBuilder = SimpleScheduleBuilder.simpleSchedule()
+				.withIntervalInSeconds(config.getJobTime()).repeatForever();
 		return TriggerBuilder.newTrigger().forJob(weatherJobDetail()).withIdentity("weatherJobTrigger")
 				.withSchedule(scheBuilder).build();
 	}

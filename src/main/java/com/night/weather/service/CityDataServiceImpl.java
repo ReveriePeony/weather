@@ -34,11 +34,10 @@ public class CityDataServiceImpl implements CityDataService {
 		br.close();
 		Province province = (Province) XmlBuilder.xmlStr2Object(Province.class, sb.toString());
 		List<County> counytList = new ArrayList<>();
-		for(City city : province.getCityList()) {
+		for (City city : province.getCityList()) {
 			counytList.addAll(city.getCountyList());
 		}
 		return counytList;
 	}
 
-	
 }

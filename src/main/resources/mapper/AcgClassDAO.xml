@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.night.weather.dao.acg.AcgClassDAO">
+
+	<resultMap id="BaseResultMap" type="com.night.weather.entity.acg.AcgClass">
+		<id column="id" property="id" />
+		<result column="classname" property="classname" />
+		<result column="classurl" property="classurl" />
+		<result column="classimg" property="classimg" />
+		<result column="status" property="status" />
+		<result column="updatequantity" property="updatequantity" />
+		<result column="createtime" property="createtime" />
+		<result column="millisecond" property="millisecond" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, classname, classurl, classimg, status, updatequantity, createtime, millisecond
+	</sql>
+
+</mapper>

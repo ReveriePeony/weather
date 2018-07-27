@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+	crossorigin="anonymous">
+<title>天气预报</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h2 th:text="${model.title}">天气</h2>
+			<select class="custom-select" id="index_sel">
+				<option th:each="county : ${model.cityList}"
+					th:value="${county.weatherCode}" th:text="${county.name}"
+					th:selected="${county.weatherCode eq model.cityId}"></option>
+			</select>
+		</div>
+		<div class="row">
+			<div th:text="${model.data.city}"></div>
+			<div th:text="${model.data.aqi}"></div>
+			<div th:text="${model.data.ganmao}"></div>
+			<div th:text="${model.data.wendu}"></div>
+
+		</div>
+		<div class="row">
+			<div>
+				昨天
+				<p th:text="${model.data.yesterday.date}"></p>
+				<p th:text="${model.data.yesterday.high}"></p>
+				<p th:text="${model.data.yesterday.fx}"></p>
+				<p th:text="${model.data.yesterday.low}"></p>
+				<p th:text="${model.data.yesterday.fl}"></p>
+				<p th:text="${model.data.yesterday.type}"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="card" th:each="forecast : ${model.data.forecast}">
+				<div class="card-body broder-info">
+					<p class="card-text text-info" th:text="${forecast.date}"></p>
+					<p class="card-text" th:text="${forecast.high}"></p>
+					<p class="card-text" th:text="${forecast.fengli}"></p>
+					<p class="card-text" th:text="${forecast.low}"></p>
+					<p class="card-text" th:text="${forecast.fengxiang}"></p>
+					<p class="card-text" th:text="${forecast.type}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="/js/common/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/weather/weather.js"></script>
+</body>
+</html>

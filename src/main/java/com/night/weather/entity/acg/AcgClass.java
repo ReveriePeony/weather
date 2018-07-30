@@ -39,6 +39,8 @@ public class AcgClass extends Model<AcgClass> {
 	private Long millisecond = System.currentTimeMillis();
 
 	private Long updatetime;
+	
+	private String week;
 
 	@Override
 	protected Serializable pkVal() {

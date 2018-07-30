@@ -3,7 +3,7 @@ package com.night.weather.service;
 import com.night.weather.entity.WeatherResponse;
 
 /**
- * 
+ * 天气数据服务接口
  * @author Reverien9@gmail.com
  * @date 2018年4月21日
  */

@@ -14,7 +14,7 @@ import com.night.weather.service.WeatherDataService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 
+ * 天气数据同步任务
  * @author Reverien9@gmail.com
  * @date 2018年4月22日
  */
@@ -36,9 +36,7 @@ public class WeatherDataSyncJob extends QuartzJobBean{
 		} catch (Exception e) {
 			log.error("cityDataService.getCityList() error!", e);
 		}
-		for(County c : counties) {
-			weatherDataService.SyncDataById(c.getWeatherCode());
-		}
+		counties.forEach(c -> weatherDataService.SyncDataById(c.getWeatherCode()));
 	}
 
 }

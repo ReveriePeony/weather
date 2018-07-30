@@ -71,6 +71,9 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 		return weatherResponse;
 	}
 
+	/**
+	 * 根据城市ID同步天气数据
+	 */
 	@Override
 	public void SyncDataById(String cityId) {
 		String uri = weatherConfig.getUri() + "cityKey=" + cityId;

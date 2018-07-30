@@ -5,6 +5,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,31 +38,39 @@ public class DMHYController {
 	@Autowired
 	private DmhySpider spider;
 
+	@SuppressWarnings("rawtypes")
 	@PostMapping("/addClass")
-	public String addclass(String classname, String classurl, String classimg) {
-		AcgClass entity = new AcgClass();
-		entity.setClassname(classname);
-		entity.setClassurl(classurl);
-		entity.setClassimg(classimg);
-		acgClassService.insert(entity);
-		return "ok";
+	public ResponseDTO addclass(@RequestBody AcgClass acgClass) {
+		acgClassService.insert(acgClass);
+		return ResponseDTO.createSuccessMsg();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/editClass")
+	public ResponseDTO editclass(@RequestBody AcgClass acgClass) {
+		acgClassService.updateById(acgClass);
+		return ResponseDTO.createSuccessMsg();
 	}
 
+	@SuppressWarnings("rawtypes")
 	@GetMapping("/spider")
-	public String spider() {
+	public ResponseDTO spider() {
 		try {
 			spider.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "acg";
+		return ResponseDTO.createSuccessMsg();
 	}
 
 	@PostMapping("/class")
 	public ResponseDTO<Page<AcgClass>> getClass(@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+			@RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize, 
+			@RequestParam() String keyword) {
 		Page<AcgClass> result = new Page<>(page, pageSize, "updatetime", false);
-		acgClassService.selectPage(result);
+		Wrapper<AcgClass> w = new EntityWrapper<>();
+		w.like("week", keyword).or().like("classname", keyword);
+		acgClassService.selectPage(result, w);
 		return ResponseDTO.createSuccess(result);
 	}
 

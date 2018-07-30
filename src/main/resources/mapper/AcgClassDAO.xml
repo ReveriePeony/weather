@@ -12,10 +12,11 @@
 		<result column="createtime" property="createtime" />
 		<result column="millisecond" property="millisecond" />
 		<result column="updatetime" property="updatetime" />
+		<result column="week" property="week" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, classname, classurl, classimg, status, updatequantity, createtime, millisecond
+		id, classname, classurl, classimg, status, updatequantity, createtime, millisecond, week
 	</sql>
 
 </mapper>

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import com.night.weather.job.WeatherDataSyncJob;
 
 /**
- * 
+ * 定时任务 配置
  * @author Reverien9@gmail.com
  * @date 2018年4月22日
  */

@@ -9,7 +9,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import com.night.weather.entity.City;
 import com.night.weather.entity.County;
 import com.night.weather.entity.Province;
 import com.night.weather.util.XmlBuilder;
@@ -24,6 +23,7 @@ public class CityDataServiceImpl implements CityDataService {
 
 	@Override
 	public List<County> getCityList() throws Exception {
+		// 读取xml数据
 		Resource resource = new ClassPathResource("citylist.xml");
 		BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream(), "UTF-8"));
 		StringBuffer sb = new StringBuffer();
@@ -34,9 +34,7 @@ public class CityDataServiceImpl implements CityDataService {
 		br.close();
 		Province province = (Province) XmlBuilder.xmlStr2Object(Province.class, sb.toString());
 		List<County> counytList = new ArrayList<>();
-		for (City city : province.getCityList()) {
-			counytList.addAll(city.getCountyList());
-		}
+		province.getCityList().forEach(city -> counytList.addAll(city.getCountyList()));
 		return counytList;
 	}
 

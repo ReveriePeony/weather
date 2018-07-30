@@ -20,7 +20,7 @@ public class ScheduledJob {
 	@Autowired
 	private DmhySpider spider;
 
-	@Scheduled(cron = "0 0/30 * * * ?")
+	@Scheduled(cron = "0 0 * * * ?")
 	public void spiderJob() {
 		log.info("start dmhy spider");
 		spider.start();
